@@ -13,12 +13,37 @@ export default function ResourcesLayout() {
           backgroundColor: Colors[theme].bg,
         },
         headerShadowVisible: false,
-        headerTintColor: Colors[theme].fg,
+        headerTintColor: Colors[theme].primary_alt,
         headerTitleStyle: {
           fontWeight: "bold",
           color: Colors[theme].text,
         },
       }}
-    />
+    >
+      <Stack.Screen
+        name="resources"
+        options={{ title: "Resources", headerBackTitle: "Back" }}
+      />
+      <Stack.Screen
+        name="anxietyInfo"
+        options={{ title: "Anxiety Disorder", headerBackTitle: "Back" }}
+      />
+      <Stack.Screen
+        name="depressionInfo"
+        options={{ title: "Depressive Disorder", headerBackTitle: "Back" }}
+      />
+      <Stack.Screen
+        name="epilepsyInfo"
+        options={{ title: "Epilepsy", headerBackTitle: "Back" }}
+      />
+      <Stack.Screen
+        name="suicideInfo"
+        options={{ title: "Suicidality", headerBackTitle: "Back" }}
+      />
+      <Stack.Screen
+        name="basicInfo"
+        options={{ title: "Basic Concepts", headerBackTitle: "Back" }}
+      />
+    </Stack>
   );
 }
