@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-// this is just a template for the result
+
 export type Result = {
   id: string;
   date: string;
@@ -10,75 +10,81 @@ export type Result = {
   answers: number[];
 };
 
-// This is what information we store for the user
 export type User = {
   locale: string;
   results: Result[];
 };
 
-// this is what we show until we have data for locale
 const user: User = {
   locale: "",
   results: [],
 };
 
-// FUNCTIONS
-
-// add new result objects
+// Add new result object
 export const addResult = async (result: Result) => {
   try {
-    // check for results
     const storedResults = await AsyncStorage.getItem("results");
-    const results = storedResults ? JSON.parse(storedResults) : [];
-
-    // append new result to this array
+    const results: Result[] = storedResults ? JSON.parse(storedResults) : [];
     results.push(result);
-
-    // push whole new array over current array
-    const jsonValue = JSON.stringify(results);
-    await AsyncStorage.setItem("results", jsonValue);
+    await AsyncStorage.setItem("results", JSON.stringify(results));
   } catch (e) {
-    console.error("error: ", e);
+    console.error("Error saving result: ", e);
   }
 };
 
-// get results for results page
-export const getResults = async () => {
+// Get results
+export const getResults = async (): Promise<Result[]> => {
   try {
     const results = await AsyncStorage.getItem("results");
-    // check empty
-    if (results) {
-      return JSON.parse(results);
-    } else {
-      return [];
-    }
+    return results ? JSON.parse(results) : [];
   } catch (e) {
-    console.error("error fetching: ", e);
-    return []; // oops errror just push nothing and we can retry on next page load
+    console.error("Error fetching results: ", e);
+    return [];
   }
 };
 
-// remove result object (key)
-export const removeResult = async (result: Result) => {
-  console.log("removeResult: ", result);
+// Remove a specific result by ID
+export const removeResult = async (target: Result) => {
+  try {
+    const storedResults = await AsyncStorage.getItem("results");
+    if (!storedResults) return;
+
+    const results: Result[] = JSON.parse(storedResults);
+    const updatedResults = results.filter((r) => r.id !== target.id);
+
+    await AsyncStorage.setItem("results", JSON.stringify(updatedResults));
+    console.log("Result removed:", target.id);
+  } catch (e) {
+    console.error("Error removing result: ", e);
+  }
 };
 
-// clear all results (nuclear)
+// Clear all results
 export const clearResults = async () => {
   try {
-    await AsyncStorage.clear();
-    console.log("nuke");
+    await AsyncStorage.removeItem("results");
+    console.log("All results cleared.");
   } catch (e) {
-    console.error("error nuke", e);
+    console.error("Error clearing results: ", e);
   }
 };
 
-// update locale
+// Update locale
 export const setLocale = async (locale: string) => {
-  console.log("setLocale: ", locale);
+  try {
+    await AsyncStorage.setItem("locale", locale);
+    console.log("Locale set:", locale);
+  } catch (e) {
+    console.error("Error setting locale: ", e);
+  }
 };
 
-// remove all user data
+// Clear all user data
 export const clearUser = async () => {
-  console.log("clearUser: ");
+  try {
+    await AsyncStorage.multiRemove(["results", "locale"]);
+    console.log("User data cleared.");
+  } catch (e) {
+    console.error("Error clearing user: ", e);
+  }
 };

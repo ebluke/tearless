@@ -8,7 +8,7 @@ import { DepressionStore } from "@/stores/screeningTools/DepressionStore";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const DepressionResults = () => {
   const theme = useColorScheme() ?? "dark";
@@ -150,23 +150,33 @@ const DepressionResults = () => {
       </View>
 
       <View style={styles.exportButtons}>
-        <Pressable style={styles.button} onPress={save}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={save}
+          activeOpacity={0.8}
+        >
           <FontAwesome5 name="save" size={16} color="white" />
           <Text style={styles.buttonText}>Save</Text>
-        </Pressable>
-        <Pressable style={styles.button} onPress={shareResults}>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={shareResults}
+          activeOpacity={0.8}
+        >
           <FontAwesome5 name="share-alt" size={16} color="white" />
           <Text style={styles.buttonText}>Share</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
 
-      <Pressable
+      <TouchableOpacity
         style={styles.discardButton}
         onPress={() => setModalVisible(true)}
+        activeOpacity={0.8}
       >
         <FontAwesome5 name="trash-alt" size={16} color="white" />
         <Text style={styles.buttonText}>Discard Results</Text>
-      </Pressable>
+      </TouchableOpacity>
 
       <Modal
         animationType="fade"
@@ -180,20 +190,23 @@ const DepressionResults = () => {
               Are you sure you want to discard the screening results?
             </Text>
             <View style={styles.modalButtons}>
-              <Pressable
+              <TouchableOpacity
                 style={[styles.modalBtn, styles.cancelBtn]}
                 onPress={() => setModalVisible(false)}
+                activeOpacity={0.8}
               >
                 <FontAwesome5 name="times" size={16} color="white" />
                 <Text style={styles.modalBtnText}>Cancel</Text>
-              </Pressable>
-              <Pressable
+              </TouchableOpacity>
+
+              <TouchableOpacity
                 style={[styles.modalBtn, styles.deleteBtn]}
                 onPress={clear}
+                activeOpacity={0.8}
               >
                 <FontAwesome5 name="trash-alt" size={16} color="white" />
                 <Text style={styles.modalBtnText}>Delete</Text>
-              </Pressable>
+              </TouchableOpacity>
             </View>
           </View>
         </View>

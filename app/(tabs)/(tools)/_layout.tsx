@@ -13,7 +13,7 @@ export default function ToolsLayout() {
           backgroundColor: Colors[theme].bg,
         },
         headerShadowVisible: false,
-        headerTintColor: Colors[theme].fg,
+        headerTintColor: Colors[theme].primary_alt,
         headerTitleStyle: {
           fontWeight: "bold",
           color: Colors[theme].text,
@@ -31,11 +31,11 @@ export default function ToolsLayout() {
       {/* tools */}
       <Stack.Screen
         name="(anxiety)/anxiety"
-        options={{ title: "Anxiety Screener" }}
+        options={{ title: "Anxiety Screener", headerBackTitle: "Back" }}
       />
       <Stack.Screen
         name="(suicide)/suicide"
-        options={{ title: "Suicide Screener" }}
+        options={{ title: "Suicide Screener", headerBackTitle: "Back" }}
       />
       <Stack.Screen
         name="(depression)/depression"
@@ -44,15 +44,15 @@ export default function ToolsLayout() {
       {/* guides -- remove for improvement is to use slugs here and render a single component dynamically */}
       <Stack.Screen
         name="(suicide)/suicideGuide"
-        options={{ title: "Screening Guide" }}
+        options={{ title: "Screening Guide", headerBackTitle: "Back" }}
       />
       <Stack.Screen
         name="(anxiety)/anxietyGuide"
-        options={{ title: "Screening Guide" }}
+        options={{ title: "Screening Guide", headerBackTitle: "Back" }}
       />
       <Stack.Screen
         name="(depression)/depressionGuide"
-        options={{ title: "Screening Guide" }}
+        options={{ title: "Screening Guide", headerBackTitle: "Back" }}
       />
     </Stack>
   );

@@ -5,6 +5,8 @@
 
 export const Colors = {
   dark: {
+    white: "#FFFFFF",
+    black: "#000000",
     icon: "#FFFFFF",
     alt: "#999999",
     bg: "#03233A",
@@ -20,6 +22,8 @@ export const Colors = {
     green: "#3cab47",
   },
   light: {
+    white: "#FFFFFF",
+    black: "#000000",
     icon: "#FFFFFF",
     alt: "#cdcdcd",
     bg: "#D9D9D9",
